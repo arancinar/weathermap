@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Marker</title>
+    <!-- The callback parameter is required, so we use console.debug as a noop -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGwzTQIUEUfYraWYCh39fJotmIeQ7TGnk&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+  </head>
+
+
+  <body>
+        <div class="rowtest"style="height:100%">
+          <div class = "columntest1"style="height:100%">
+
+          <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Is My Drive Safe?</a>
+            </div>
+          </nav>
+          <br>
+          <p>This is a website which can inform you if your planned route is safe.</p>
+          </div>
+          <div class = "columntest2"style="height:100%">
+
+              <gmp-map center="40.12150192260742,-100.45039367675781" zoom="4" map-id="DEMO_MAP_ID">
+                <gmp-advanced-marker position="40.12150192260742,-100.45039367675781" title="My location">
+                </gmp-advanced-marker>
+              </gmp-map>
+          </div>
+
+        </div>
+
+    <script src="bootstrap.min.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,28 @@
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+       #map {
+        height: 50%;
+      }
+      
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 50%;
+        margin: 0;
+        padding: 0;
+      }
+      .columntest1 {
+        float: left;
+        width: 30%;
+      }
+      .columntest2 {
+        float: left;
+        width: 50%;
+      }
+      
+      /* Clear floats after the columns */
+      .rowtest:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
