@@ -147,6 +147,7 @@ async function getDirections1(origlat, origlong, destlat, destlong){
         case 0:
           var directionsDisplay = new google.maps.DirectionsRenderer(
             {suppressMarkers: true,
+            preserveViewport: true,
             polylineOptions: {
               strokeWeight: 5,
               strokeColor: "blue"
@@ -160,6 +161,7 @@ async function getDirections1(origlat, origlong, destlat, destlong){
         case 1:
           var directionsDisplay = new google.maps.DirectionsRenderer(
             {suppressMarkers: true,
+            preserveViewport: true,
             polylineOptions: {
               strokeWeight: 5,
               strokeColor: "#fdc70c"
@@ -172,6 +174,7 @@ async function getDirections1(origlat, origlong, destlat, destlong){
         case 2:
           var directionsDisplay = new google.maps.DirectionsRenderer(
             {suppressMarkers: true,
+             preserveViewport: true,
             polylineOptions: {
               strokeWeight: 5,
               strokeColor: "#f3903f"
@@ -184,9 +187,10 @@ async function getDirections1(origlat, origlong, destlat, destlong){
         case 3:
           var directionsDisplay = new google.maps.DirectionsRenderer(
             {suppressMarkers: true,
+             preserveViewport: true,
             polylineOptions: {
               strokeWeight: 5,
-              strokeColor: "#ed683c"
+              strokeColor: "#e93e3a"
             }
           });
           directionsarray.push(directionsDisplay);
@@ -196,9 +200,10 @@ async function getDirections1(origlat, origlong, destlat, destlong){
         case 4:         
          var directionsDisplay = new google.maps.DirectionsRenderer(
           {suppressMarkers: true,
+          preserveViewport: true,
           polylineOptions: {
             strokeWeight: 5,
-            strokeColor: "#e93e3a"
+            strokeColor: " #000000"
           }
         });
         directionsarray.push(directionsDisplay);
