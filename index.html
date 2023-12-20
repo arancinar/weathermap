@@ -1,113 +1,84 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Is My Winter Drive Safe?</title>
-    <!-- The callback parameter is required, so we use console.debug as a noop -->
-    </script>
-    <link rel="stylesheet" href="./bootstrap.min.css">
-    <link href="style.css" rel="stylesheet">
-
-  </head>
-
-
-  <body>
-        <div class="rowtest"style="height:100%">
-          <div class = "columntest1"style="height:100%">
-          <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-              <a class="navbar-brand" href="#">&nbsp&nbspIs My Winter Drive Safe?</a>
-          </nav>
-
-
-          <div class = "main-text-box" style= "height:100%">
-          <p>This is a website created to inform you if your planned route is safe during the winter season.</p>
-          <div class="directionsinput">
-            <input type="text" id = "from" class="form-control" placeholder="Origin" id="inputDefault">
-          <div class="form-group">
-            <input type="text" id = "to" class="form-control" placeholder="Destination" id="inputDefault"></div>
-          </div>
-          <br>
-          <button type="submit" class="btn btn-primary" onclick="calcRoute()">Search</button>
-          <button type="submit" class="btn btn-primary" onclick="clearMap()">clear</button>
-          <br><br>
-          <p>Simply type in your planned origin and destination of your trip, and check the color along your path.</p>
-          <p>Any color other than blue indicates that there has been recent snowfall in the area, meaning that roads could
-            still have unplowed sections along your route.
-          </p>
-
-          <div class="float-container">
-
-            <div class="float-child">
-              <p>No recent snowfall.</p>
+   <head>
+      <title>Is My Winter Drive Safe?</title>
+      <!-- The callback parameter is required, so we use console.debug as a noop -->
+      </script>
+      <link rel="stylesheet" href="./bootstrap.min.css">
+      <link href="style.css" rel="stylesheet">
+   </head>
+   <body>
+      <div class="rowtest"style="height:100%">
+         <div class = "columntest1"style="height:100%">
+            <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+               <a class="navbar-brand" href="#">&nbsp&nbspIs My Winter Drive Safe?</a>
+            </nav>
+            <div class = "main-text-box" style= "height:100%">
+               <p>This is a website created to inform you if your planned route is safe during the winter season.</p>
+               <div class="directionsinput">
+                  <input type="text" id = "from" class="form-control" placeholder="Origin" id="inputDefault">
+                  <div class="form-group">
+                     <input type="text" id = "to" class="form-control" placeholder="Destination" id="inputDefault">
+                  </div>
+               </div>
+               <br>
+               <button type="submit" class="btn btn-primary" onclick="calcRoute()">Search</button>
+               <button type="submit" class="btn btn-primary" onclick="clearMap()">clear</button>
+               <br><br>
+               <p>Simply type in your planned origin and destination of your trip, and check the color along your path.</p>
+               <div class="float-container">
+                  <div class="float-child">
+                     <p>No recent snowfall.</p>
+                  </div>
+                  <div class="float-childbox">
+                     <div class = 'box nothreat'></div>
+                  </div>
+               </div>
+               <div class="float-container">
+                  <div class="float-child">
+                     <p>Two inches or less</p>
+                  </div>
+                  <div class="float-childbox">
+                     <div class = 'box onethreat'></div>
+                  </div>
+               </div>
+               <div class="float-container">
+                  <div class="float-child">
+                     <p>Two to four inches</p>
+                  </div>
+                  <div class="float-childbox">
+                     <div class = 'box twothreat'></div>
+                  </div>
+               </div>
+               <div class="float-container">
+                  <div class="float-child">
+                     <p>Four to six inches</p>
+                  </div>
+                  <div class="float-childbox">
+                     <div class = 'box threethreat'></div>
+                  </div>
+               </div>
+               <div class="float-container">
+                  <div class="float-child">
+                     <p>Greater than six inches</p>
+                  </div>
+                  <div class="float-childbox">
+                     <div class = 'box fourthreat'></div>
+                  </div>
+               </div>
             </div>
-            
-            <div class="float-childbox">
-              <div class = 'box nothreat'></div>
+         </div>
+         
+         <div class = "columntest2"style="height:100%">
+            <div id="googleMap">
+               <div id="output">
+               </div>
             </div>
-            
-          </div>
-          <div class="float-container">
-
-            <div class="float-child">
-              <p>Two inches or less</p>
-            </div>
-            
-            <div class="float-childbox">
-              <div class = 'box onethreat'></div>
-            </div>
-            
-          </div>
-          <div class="float-container">
-
-            <div class="float-child">
-              <p>Two to four inches</p>
-            </div>
-            
-            <div class="float-childbox">
-              <div class = 'box twothreat'></div>
-            </div>
-            
-          </div>
-          <div class="float-container">
-
-            <div class="float-child">
-              <p>Four to six inches</p>
-            </div>
-            
-            <div class="float-childbox">
-              <div class = 'box threethreat'></div>
-            </div>
-            
-          </div>
-          <div class="float-container">
-
-            <div class="float-child">
-              <p>Greater than six inches</p>
-            </div>
-            
-            <div class="float-childbox">
-              <div class = 'box fourthreat'></div>
-            </div>
-            
-          </div>
-        </div>
-
-
-          
-          </div>
-          <div class = "columntest2"style="height:100%">
-              <div id="googleMap">
-                <div id="output">
-  
-              </div>
-          </div>
-          </div>
-
-        </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGwzTQIUEUfYraWYCh39fJotmIeQ7TGnk&libraries=places"></script>
-
-    <script src="bootstrap.min.js"></script>
-    <script src="main.js"></script>
-
-    <body onload="">
-  </body>
+         </div>
+      </div>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGwzTQIUEUfYraWYCh39fJotmIeQ7TGnk&libraries=places"></script>
+      <script src="bootstrap.min.js"></script>
+      <script src="main.js"></script>
+      <body onload="">
+   </body>
 </html>

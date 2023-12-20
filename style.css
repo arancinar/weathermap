@@ -3,6 +3,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden; /* Hide scrollbars */
+
 }
 
 .columntest1 {
@@ -17,6 +19,10 @@ display: flex;
 .main-text-box{
   margin:10px;
 }
+.stats{
+  position: absolute;
+  bottom: 0px;
+}
 /*map*/
 #googleMap {
 width: 100%;
@@ -26,7 +32,7 @@ height: 100%;
   float: left;
   height: 20px;
   width: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   border: 1px solid black;
   clear: both;
 }
@@ -49,7 +55,7 @@ height: 100%;
 }
 
 .float-container {
-  padding: 5px;
+  padding: 0px;
 }
 .float-childbox{
   float: right;
@@ -61,5 +67,5 @@ height: 100%;
 
   width: 65%;
   float: left;
-  padding: 1px;
+  padding: 0px;
 }  
