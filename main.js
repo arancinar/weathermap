@@ -44,6 +44,10 @@ function clearMap() {
 
 //define calcRoute function
 function calcRoute() {
+  document.getElementById("overlay").style.zIndex = "1";
+  document.getElementById("loadingwindow").style.zIndex = "2";
+
+
     clearMap()
     var from = document.getElementById("from").value;
     var to = document.getElementById("to").value;
@@ -60,20 +64,29 @@ function calcRoute() {
 
 
     //pass the request to the route method
-
+    var directionsbad = 0;
     var result2;
-    let f = directionsService.route(request, function(result, status) {
 
+
+    let f = directionsService.route(request, function(result, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
         result2 = result;
         distanceadjuster = Math.floor((result2.routes[0].legs[0].distance.value) / 500000);
 
 
         totalsteps = 5 + distanceadjuster;
-        console.log(totalsteps)
+      }
+      else{
+        document.getElementById("overlay").style.zIndex = "-1";
+        document.getElementById("loadingwindow").style.zIndex = "-1";
+        alert ("No route found!\n\nPlease check for spelling errors, and ensure there is a valid route between your origin and destination.");  
+        throw new Error('Bad directions!');
+      }
+    })
 
-    });
     f.then(() => {
-
+      console.log(directionsbad)
+      if(directionsbad ==0){
 
 
         var thisisfirst = 1;
@@ -81,26 +94,39 @@ function calcRoute() {
 
         var spacer = Math.floor(totallength / totalsteps)
 
+        var newlat =parseFloat(result2.routes[0].overview_path[Math.floor(totallength/2)].lat());
+        var newlong =parseFloat(result2.routes[0].overview_path[Math.floor(totallength/2)].lng());
 
+
+        console.log(newlat)
+        console.log(newlong)
+        latandlong = {
+          newlat, newlong
+        }
+
+        map.setCenter({lat:newlat, lng:newlong});
+        map.setZoom(6);
         for (var i = 0; i < totallength; i++) {
             if (i % spacer == 0 || i + 1 == totallength) {
                 if (thisisfirst == 1) {
                     getDirections1(result2.routes[0].overview_path[i].lat(), result2.routes[0].overview_path[i].lng(), result2.routes[0].overview_path[i].lat(), result2.routes[0].overview_path[i].lng());
-                    pastlat = result2.routes[0].overview_path[i].lat();
-                    pastlong = result2.routes[0].overview_path[i].lng();
                     thisisfirst = 0;
                 } else {
                     getDirections1(pastlat, pastlong, result2.routes[0].overview_path[i].lat(), result2.routes[0].overview_path[i].lng());
-                    pastlat = result2.routes[0].overview_path[i].lat();
-                    pastlong = result2.routes[0].overview_path[i].lng();
                 }
+                pastlat = result2.routes[0].overview_path[i].lat();
+                pastlong = result2.routes[0].overview_path[i].lng();
             }
         }
-
-    })
-
-
+      }
+      document.getElementById("overlay").style.zIndex = "-1";
+      document.getElementById("loadingwindow").style.zIndex = "-1";
+    }).catch(error => alert(error.message));
+  
+    
+  
 }
+
 
 
 async function getDirections1(origlat, origlong, destlat, destlong) {
@@ -127,7 +153,6 @@ async function getDirections1(origlat, origlong, destlat, destlong) {
                 var totalsnow = 0;
                 for (var i = 0; i < 48; i++) {
                     totalsnow = totalsnow + out.hourly.snowfall[i]
-                    console.log(totalsnow)
                 }
                 if (totalsnow == 0) {
                     therewassnow = 0;
