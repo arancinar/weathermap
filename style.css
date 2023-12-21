@@ -78,14 +78,26 @@ display: flex;
 .main-text-box{
   margin:10px;
 }
-.stats{
-  position: absolute;
-  bottom: 0px;
-}
+
 /*map*/
 #googleMap {
-width: 100%;
-height: 100%;
+width: 100%;  
+height: flex;
+}
+.stats{
+  background:rgb(255, 255, 255);
+  position: absolute;
+  bottom: 0;
+  right:10%;
+  font-size: 40px; 
+  color:yellow;  
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  height: 20%;
+  z-index:4;
+  width:  calc(80% - 300px);
+  border: 3px solid #949292;
+  text-align: center;
 }
 .box {
   float: left;

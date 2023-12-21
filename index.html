@@ -29,7 +29,9 @@
                <button type="submit" class="btn btn-primary" onclick="calcRoute()">Search</button>
                <button type="submit" class="btn btn-primary" onclick="clearMap()">clear</button>
                <br><br>
-               <p>Simply type in your planned origin and destination of your trip, and check the color along your path.</p>
+               <p style="font-size: 14px">All measurements are taken within a 48 hour period. This is intended to estimate the remaining snow on main roads.
+              </p>
+               <p style="font-size: 14px">Below is the color coding for the map.</p>
                <div class="float-container">
                   <div class="float-child">
                      <p>No recent snowfall.</p>
@@ -72,13 +74,19 @@
                </div>
             </div>
          </div>
-         
+
          <div class = "columntest2"style="height:100%">
             <div id="googleMap">
                <div id="output">
                </div>
             </div>
+                     <div class = "stats">
+                      <p style = "font-size: 30px; color:black;">Overall Safety Rating</p>
+                      <div id = "innertext"></div>
+                    </div>
+
          </div>
+
       </div>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGwzTQIUEUfYraWYCh39fJotmIeQ7TGnk&libraries=places"></script>
       <script src="bootstrap.min.js"></script>

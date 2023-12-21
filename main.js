@@ -35,15 +35,18 @@ const directionsarray = []
 
 function clearMap() {
     //console.log("length:" + directionsarray[0])
-
+    worstcondition = 0;
     for (var i = 0; i < directionsarray.length; i++) {
         directionsarray[i].set('directions', null);
     }
 
 }
-
+var finallat = 0;
+var finallong = 0;
+var worstcondition = 0;
 //define calcRoute function
 function calcRoute() {
+
   document.getElementById("overlay").style.zIndex = "1";
   document.getElementById("loadingwindow").style.zIndex = "2";
 
@@ -70,6 +73,9 @@ function calcRoute() {
 
     let f = directionsService.route(request, function(result, status) {
       if (status == google.maps.DirectionsStatus.OK) {
+        document.getElementById("innertext").innerHTML = "Safe";
+        document.getElementById('innertext').style.color = 'rgb(0,0,255)';
+
         result2 = result;
         distanceadjuster = Math.floor((result2.routes[0].legs[0].distance.value) / 500000);
 
@@ -84,6 +90,8 @@ function calcRoute() {
       }
     })
 
+
+
     f.then(() => {
       console.log(directionsbad)
       if(directionsbad ==0){
@@ -96,6 +104,9 @@ function calcRoute() {
 
         var newlat =parseFloat(result2.routes[0].overview_path[Math.floor(totallength/2)].lat());
         var newlong =parseFloat(result2.routes[0].overview_path[Math.floor(totallength/2)].lng());
+
+        finallat =Math.round(parseFloat(result2.routes[0].overview_path[Math.floor(totallength-1)].lat()) * 100) / 100;
+        finallong =Math.round(parseFloat(result2.routes[0].overview_path[Math.floor(totallength-1)].lng()) * 100) / 100;
 
 
         console.log(newlat)
@@ -119,18 +130,21 @@ function calcRoute() {
             }
         }
       }
+     
+
       document.getElementById("overlay").style.zIndex = "-1";
       document.getElementById("loadingwindow").style.zIndex = "-1";
-    }).catch(error => alert(error.message));
+    })
+    }
   
-    
   
-}
+  
+
 
 
 
 async function getDirections1(origlat, origlong, destlat, destlong) {
-    var weatherurl = "https://api.open-meteo.com/v1/forecast?latitude=" + (origlat + destlat) / 2 + "&longitude=" + (origlong + destlong) / 2 + "&hourly=snowfall&past_days=1&forecast_days=1";
+    var weatherurl = "https://api.open-meteo.com/v1/forecast?latitude=" + origlat + "&longitude=" + origlong + "&hourly=snowfall&past_days=1&forecast_days=1";
     var request = {
         origin: new google.maps.LatLng(origlat, origlong),
         destination: new google.maps.LatLng(destlat, destlong),
@@ -146,6 +160,7 @@ async function getDirections1(origlat, origlong, destlat, destlong) {
 
     });
     p.then(() => {
+
         fetch(weatherurl)
             .then(res => res.json())
             .then((out) => {
@@ -195,6 +210,13 @@ async function getDirections1(origlat, origlong, destlat, destlong) {
                                 strokeColor: "#fdc70c"
                             }
                         });
+                        if(therewassnow>worstcondition){
+                          worstcondition = therewassnow;
+                          console.log("worsened to 1");
+                          document.getElementById("innertext").innerHTML = "Likely Safe";
+                          document.getElementById('innertext').style.color = 'rgb(253,199,12)';
+
+                        }
                         directionsarray.push(directionsDisplay);
                         directionsDisplay.setMap(map);
                         break;
@@ -208,6 +230,14 @@ async function getDirections1(origlat, origlong, destlat, destlong) {
                                 strokeColor: "#f3903f"
                             }
                         });
+                        if(therewassnow>worstcondition){
+                          worstcondition = therewassnow;
+                          console.log("worsened to 2");
+                          document.getElementById("innertext").innerHTML = "Use Increased Caution";
+                          document.getElementById('innertext').style.color = 'rgb(243,144,63)';
+
+
+                        }
                         directionsarray.push(directionsDisplay);
                         directionsDisplay.setMap(map);
                         break;
@@ -221,6 +251,15 @@ async function getDirections1(origlat, origlong, destlat, destlong) {
                                 strokeColor: "#e93e3a"
                             }
                         });
+                        if(therewassnow>worstcondition){
+                          worstcondition = therewassnow;
+                          console.log("worsened to 3");
+                          document.getElementById("innertext").innerHTML = "Use Extreme Caution";
+                          document.getElementById('innertext').style.color = 'rgb(233,62,58)';
+
+
+
+                        }
                         directionsarray.push(directionsDisplay);
                         directionsDisplay.setMap(map);
                         break;
@@ -234,6 +273,14 @@ async function getDirections1(origlat, origlong, destlat, destlong) {
                                 strokeColor: " #000000"
                             }
                         });
+                        if(therewassnow>worstcondition){
+                          worstcondition = therewassnow;
+                          console.log("worsened to 4");
+                          document.getElementById("innertext").innerHTML = "Reconsider Travel";
+                          document.getElementById('innertext').style.color = 'rgb(0,0,0)';
+
+
+                        }
                         directionsarray.push(directionsDisplay);
                         directionsDisplay.setMap(map);
                         break;
