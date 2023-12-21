@@ -94,7 +94,7 @@ height: flex;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   height: 20%;
-  z-index:4;
+  z-index:-1;
   width:  calc(80% - 300px);
   border: 3px solid #949292;
   text-align: center;

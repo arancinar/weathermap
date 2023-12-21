@@ -2,7 +2,6 @@
 //set map options
 
 
-
 var donecalculating = 0;
 var myLatLng = {
     lat: 38.3460,
@@ -49,6 +48,8 @@ function calcRoute() {
 
   document.getElementById("overlay").style.zIndex = "1";
   document.getElementById("loadingwindow").style.zIndex = "2";
+  document.getElementById("stats").style.zIndex = "2";
+
 
 
     clearMap()
